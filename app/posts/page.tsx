@@ -13,10 +13,6 @@ export default async function Posts() {
     orderBy: {
       createdAt: "desc",
     },
-    cacheStrategy: {
-      ttl: 60,
-      swr: 60,
-    },
   });
 
   return (

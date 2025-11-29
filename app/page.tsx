@@ -98,10 +98,6 @@ export default async function Home() {
   // limit to 100 users and cache for 60 seconds.
   const users = await prisma.user.findMany({
     take: 100,
-    cacheStrategy: {
-      ttl: 60,
-      swr: 60,
-    },
   });
 
   return (

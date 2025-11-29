@@ -1,10 +1,16 @@
-import { PrismaClient } from '@prisma/client/edge'
-import { withAccelerate } from '@prisma/extension-accelerate'
+import { PrismaClient } from '@prisma/client'
 
-const prisma = new PrismaClient().$extends(withAccelerate())
+// Dùng biến global để tránh tạo nhiều PrismaClient trong môi trường dev (HMR)
+const globalForPrisma = global as unknown as { prisma?: PrismaClient }
 
-const globalForPrisma = global as unknown as { prisma: typeof prisma }
+const prisma =
+  globalForPrisma.prisma ??
+  new PrismaClient({
+    log: process.env.NODE_ENV === 'development' ? ['query', 'error', 'warn'] : ['error'],
+  })
 
-if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma
+if (process.env.NODE_ENV !== 'production') {
+  globalForPrisma.prisma = prisma
+}
 
 export default prisma
