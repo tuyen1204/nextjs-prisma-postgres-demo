@@ -104,3 +104,4 @@ Here are some ways to learn more and expand upon this example:
 - [Discord](https://pris.ly/discord)
 - [Twitter](https://twitter.com/prisma)
 - [Bluesky](https://bsky.app/profile/prisma.dev)
+# nextjs-prisma-postgres-demo
